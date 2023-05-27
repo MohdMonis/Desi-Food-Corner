@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="loginform" class="orderc">
+    @using (Html.BeginForm("CreateOrderForCustomer", "Order", FormMethod.Post))
+    {
+        <form id="formcreateorder">
+            <div id="orderitemslist">
+                <div>
+                    <label class="label" for="paymentMethod">Select Payment method</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option selected disabled>Select Option</option>
+                        <option value="180720000">Cash</option>
+                        <option value="180720001">UPI</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="label" for="mobilenumber">Enter Mobile Number</label>
+                    <input class="inp" id="mobilenumber" name="mobilenumber" placeholder="Enter Mobile Number" required />
+                </div>
+                <div>
+                    <label class="label" for="address">Enter Address</label>
+                    <input class="inp" id="address" name="address" placeholder="Enter address" required />
+                </div>
+                <button id="btn-sub" type="submit">Continue</button>
+            </div>
+        </form>
+    }
+</div>

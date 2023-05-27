@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+<h1 id="heading">Hello, wellcome to Desi Food Corner Signup</h1>
+<div id="signupform">
+    <form name="Signup">
+        <div class="srow">
+            <input id="firstname" class="sinput" type="text" name="firstName" placeholder="First Name" required />
+            <label for="firstname" class="slbl">First Name</label>
+        </div>
+        <div class="srow">
+            <input id="lastname" class="sinput" type="text" name="lastName" placeholder="Last Name" required />
+            <label for="lastname" class="slbl">Last Name</label>
+        </div>
+        <div class="srow">
+            <select id="gender" name="gender">
+                <option disabled selected>Select Gender</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+            </select>
+            <label for="gender" class="slbl">Gender</label>
+        </div>
+        <div class="srow">
+            <input id="mobilenumber" class="sinput" type="text" name="mobile" placeholder="Contact Number" required />
+            <label for="mobilenumber" class="slbl">Mobile Number</label>
+        </div>
+        <div class="srow">
+            <input id="dob" class="sinput" type="date" name="dob" />
+            <label for="dob" class="slbl">Date of Birth</label>
+        </div>
+        <div class="srow">
+            <input id="email" class="sinput" type="email" name="email" placeholder="Email" required />
+            <label for="email" class="slbl">Email</label>
+        </div>
+        <div class="srow">
+            <input id="password" class="sinput" type="password" name="password" placeholder="Password" required />
+            <label for="password" class="slbl">Password</label>
+        </div>
+        <div class="btn-sign-log">
+            <input class="btn btn-primary btn-login" formaction="@Url.Action("SignupForm", "Signup")" type="submit" value="Signup" />
+        </div>
+    </form>
+</div>
+<a id="btn-to-login-page" href="~/Login/Login">
+    <input class="btn btn-primary btn-login" type="button" value="Login" />
+</a>

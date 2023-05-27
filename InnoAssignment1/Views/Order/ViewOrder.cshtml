@@ -1,0 +1,104 @@
+﻿@model InnoAssignment1.ViewModel.ViewOrder_VM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @if (Model.Order != null)
+    {
+        if (Model.Order.StatusReasonValue == 180720000)
+        {
+            using (Html.BeginForm("AddItemsInCustomerOrder", "Order", FormMethod.Post))
+            {
+                <div>
+                    <div id="ad-cards">
+                        <select required name="item">
+                            <option selected disabled>Select Item</option>
+                            @foreach (var item in Model.ItemMaster)
+                            {
+                                <option value=@item.Id>@item.Name | Price : @item.Price</option>
+                            }
+                        </select>
+                        <div>
+                            <label for="quantity">Quantity</label>
+                            <input type="text" name="quantity" required id="quantity" placeholder="Enter Quantity" />
+                        </div>
+                    </div>
+                    <button type="submit">Add Item</button>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <h1> Items list is updating please be patience or try after some time </h1>
+    }
+    <form><button type="submit" formaction="@Url.Action("ViewOrdersForCustomer", "Order")">Go to Home Page</button></form>
+
+    <div>
+        <p>Order Number: <span>@Model.Order.OrderNo</span></p>
+        <p>Contact Number: <span>@Model.Order.ContactNo</span></p>
+        <p>Address: <span>@Model.Order.Address</span></p>
+        <p>Order Amount: <span>@Model.Order.Amount</span></p>
+        <p>Discount on Order: <span>@Model.Order.Discount</span></p>
+        <p>GST Charges: <span>@Model.Order.GST</span></p>
+        <p>Total Amount: <span>@Model.Order.TotalAmount</span></p>
+    </div>
+
+
+    @if (Model.OrderItems != null && Model.OrderItems.Count > 0)
+    {
+        <table border="1">
+            <tr>
+                @if (Model.Order.StatusReasonValue == 180720000)
+                {
+
+
+                    <th colspan="5">Item Details</th>
+                }
+                else
+                {
+                    <th colspan="4">Item Details</th>
+
+                }
+            </tr>
+            <tr>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Price Per Piece
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Total Amount of Item
+                </th>
+                @if (Model.Order.StatusReasonValue == 180720000)
+                {
+                    <th>Perform</th>
+                }
+            </tr>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.ItemMasterName</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Amount</td>
+                    @if (Model.Order.StatusReasonValue == 180720000)
+                    {
+                        <td><form><button type="submit" formaction="@Url.Action("DeleteOrderItem", "Order", new { id = item.Id })">Delete</button></form></td>
+                    }
+                </tr>
+            }
+        </table>
+        if (Model.Order.StatusReasonValue == 180720000)
+        {
+            <form><button type="submit" formaction="@Url.Action("PlaceOrder", "Order", new { Id = Model.Order.Id })">Place Order</button></form>
+        }
+    }
+
+</div>

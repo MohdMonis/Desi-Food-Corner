@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+    <h3>List of Orders to prepare...</h3>
+    @if (ViewBag.OrdersList != null)
+    {
+        <table>
+            <tr>
+                <th>OrderNo</th>
+                <th>Order Name</th>
+                <th>Customer Name</th>
+                <th>ContactNo</th>
+                <th>Address</th>
+                <th>Delivered By</th>
+                <th>Dispatched By</th>
+                <th>StatusReasonText</th>
+                <th colspan="2">Action</th>
+            </tr>
+            @foreach (var Item in ViewBag.OrdersList)
+            {
+                if (Item.StatusReasonValue != 180720000 && Item.StatusReasonValue != 180720012)
+                {
+
+                    <tr>
+                        <td>@Item.OrderNo</td>
+                        <td>@Item.Name</td>
+                        <td>@Item.CustomerName</td>
+                        <td>@Item.ContactNo</td>
+                        <td>@Item.Address</td>
+                        <td>@Item.DeliveredByName</td>
+                        <td>@Item.DispatchedByName</td>
+                        <td>@Item.StatusReasonText</td>
+                        <td>
+                            <form>
+                                <button type="submit" formaction="@Url.Action("ViewOrder", "Order", new { Id = Item.Id})">View Order Details</button>
+                            </form>
+                        </td>
+                        <td>
+                            @if (Item.StatusReasonValue >= 180720001 && Item.StatusReasonValue <= 180720003 && Item.StatusReasonValue != 180720002)
+                            {
+                                <form>
+                                        @if (Item.StatusReasonValue == 180720001)
+                                        {
+                                    <button type="submit" formaction="@Url.Action("UpdateOrderStatus", "Order", new { Id = Item.Id })">Ready To Move</button>
+                                        }else if(Item.StatusReasonValue == 180720003)
+                            {
+                                    <button type="submit" formaction="@Url.Action("UpdateOrderStatus", "Order", new { Id = Item.Id })">Shipped</button>
+                            }
+                                </form>
+                            }
+                            else
+                            {
+                                if (Item.StatusReasonValue == 180720002)
+                                {
+                                    <span>DeliveryBoy Not Assigned Yet</span>
+                                }
+                                else
+                                {
+                                    <span>Order Dispatched</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    }
+    else
+    {<h3>Yor don't have any order to prepare</h3>}<br />
+</div>

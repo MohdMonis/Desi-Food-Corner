@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+
+<h1 id="heading">Welcome to Desi Food Corner Login Page</h1>
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+    <div id="loginform">
+        <form name="login">
+            <div class="mb-3 row">
+                <label for="email" class=" lbl col-sm-2 col-form-label">Email</label>
+                <div>
+                    <input id="email" required type="text" class="input form-control" name="email" placeholder="Enter Email" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="password" class="lbl col-sm-2 col-form-label">Password</label>
+                <div>
+                    <input id="password" required type="password" class="input form-control" name="password" placeholder="Enter Password" />
+                </div>
+            </div>
+            <div class="dis-flex-clm">
+                <input type="submit" class="font-s cstm-frgt" name="login" formaction='@Url.Action("ForgotPass", "Login")' formmethod="post" value="forgot password" />
+                <input type="submit" class="btn btn-primary btn-login" name="login" formaction='@Url.Action("LoginSubmit", "Login")' formmethod="post" value="Login" />
+                <p class="font-s">New Customer? &ensp; @Html.ActionLink("register_here", "Signup", "Signup", null, new { id = "sgnup" })</p>
+            </div>
+        </form>
+    </div>
+}

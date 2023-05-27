@@ -1,0 +1,204 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+:root {
+    --border-top-left-color: blue;
+    --border-bottom-right-color: red;
+    --blue-hyperlink-color: #0d6efd;
+}
+
+#main {
+    width: 100vw;
+    height: 100vh;
+    gap: 20px;
+    background-image: url("https://images.unsplash.com/photo-1457666134378-6b77915bd5f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDZ8fGVzdGhldGljJTIwZm9vZCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mail-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+}
+
+#heading, #para {
+    color: rgb(255 216 0);
+}
+
+#para {
+    text-align: center;
+    letter-spacing:1px;
+    font-weight: 700;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(0 0 0);
+    backdrop-filter: hue-rotate(60px);
+    text-shadow: 1px 1px 16px #0026ff
+}
+
+.lbl {
+    font-weight: 600;
+    width: 100%;
+}
+
+.input {
+    border: 1px solid rgb(0 0 0 / 0.5);
+}
+
+#loginform, #signupform {
+    width: 300px;
+    padding: 20px 20px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border: 2px solid;
+    border-top-color: var(--border-top-left-color);
+    border-left-color: var(--border-top-left-color);
+    border-right-color: var(--border-bottom-right-color);
+    border-bottom-color: var(--border-bottom-right-color);
+    background-color: rgb(255 255 255 / 0.4);
+    backdrop-filter: blur(2px);
+}
+
+.orderc {
+    position: absolute;
+    top: 10%;
+    width: 300px;
+    padding: 20px 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#orderitemslist > div {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0;
+    color:black;
+}
+
+#orderitemslist > div:nth-child(1) {
+    margin-top: 0px;
+}
+
+.dis-flex-clm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-login {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    box-shadow: inset -2px -2px 4px 2px rgb(0 0 0 / 0.3);
+    font-weight:600;
+    letter-spacing: 1px;
+}
+.btn-login:active {
+    box-shadow: inset 2px 2px 4px 2px rgb(0 0 0 / 0.3);
+}
+
+.dis-flex {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.font-s {
+    font-size: 13px;
+    text-align: start;
+}
+
+.cstm-frgt {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: underline;
+    color: rgb(0 0 255);
+}
+
+label.label{
+    font-weight:600;
+    margin:8px 0px;
+}
+
+input, select {
+    border-radius: 6px;
+    border: 1px solid rgb(0 0 0 / 0.6);
+    color: rgb(0 0 0 / 0.8);
+    padding: 6px;
+    transition: all linear .3s;
+}
+
+#btn-sub {
+    width: 100%;
+    background-color: #0d6efd;
+    border: 1px solid #0d6efd;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 0;
+    box-shadow: inset -2px -2px 4px 2px rgb(0 0 0 / 0.3);
+}
+
+#btn-sub:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+#btn-sub:active {
+    background-color: #0a58ca;
+    border-color: #0a53be;
+    box-shadow: inset 0 3px 5px rgb(0 0 0/ 0.125);
+}
+
+#sgnup {
+    color: rgb(255 216 0);
+}
+
+/*  Signup page styling starts from here  */
+
+#signupform {
+    width: 340px;
+    border: 2px solid;
+    border-top-color: var(--border-top-left-color);
+    border-left-color: var(--border-top-left-color);
+    border-right-color: var(--border-bottom-right-color);
+    border-bottom-color: var(--border-bottom-right-color);
+    padding: 10px 20px
+}
+.srow{
+    position: relative;
+    display:flex;
+    flex-direction:column-reverse;
+    margin-bottom: 4px;
+}
+.srow>label{
+    font-weight:600;
+}
+.srow>input, .srow>input[type="date"], srow>select{
+    font-weight:500;
+}
+.srow>.sinput:focus, .srow>.sinput:active, select:focus{
+    outline:none;
+    box-shadow: 0px 0px 0px 4px rgba(13 110 253/0.25);
+}
+#btn-to-login-page {
+    margin-top: 10px;
+    z-index: 10;
+}
+.btn-sign-log{
+    margin-top:10px;
+}

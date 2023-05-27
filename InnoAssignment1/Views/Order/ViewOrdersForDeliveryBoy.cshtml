@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3>Your Deliverys for today are given below...</h3>
+    @if (ViewBag.OrdersList != null)
+    {
+        <table>
+            <tr>
+                <th>OrderNo</th>
+                <th>Order Name</th>
+                <th>Customer Name</th>
+                <th>ContactNo</th>
+                <th>Address</th>
+                <th>Delivered By</th>
+                <th>Dispatched By</th>
+                <th>StatusReasonText</th>
+                <th colspan="2">Action</th>
+            </tr>
+            @foreach (var Item in ViewBag.OrdersList)
+            {
+                if (Item.StatusReasonValue != 180720000 && Item.StatusReasonValue != 180720012)
+                {
+
+                    <tr>
+                        <td>@Item.OrderNo</td>
+                        <td>@Item.Name</td>
+                        <td>@Item.CustomerName</td>
+                        <td>@Item.ContactNo</td>
+                        <td>@Item.Address</td>
+                        <td>@Item.DeliveredByName</td>
+                        <td>@Item.DispatchedByName</td>
+                        <td>@Item.StatusReasonText</td>
+                        @if (Item.StatusReasonValue == 180720002)
+                        {
+                            <td colspan="2">
+                                <form>
+                                    <button type="submit" formaction="@Url.Action("UpdateOrderStatus", "Order", new { Id = Item.Id })">Pickup Order</button>
+                                </form>
+                            </td>
+                        }
+                        else if (Item.StatusReasonValue == 180720004)
+                        {
+                            <td>
+                                <form>
+                                    <button type="submit" formaction="@Url.Action("UpdateOrderStatus", "Order", new { Id = Item.Id })">Deliver</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                    <button type="submit" formaction="@Url.Action("UpdateStatusToUnDelivered", "Order", new { Id = Item.Id })">UnDelivered</button>
+                                </form>
+                            </td>
+                        }
+                        else
+                        {
+                            if (Item.StatusReasonValue == 180720011)
+                            {
+                                <td colspan="2">Order Delivered</td>
+                            }
+                            else if (Item.StatusReasonValue == 180720013)
+                            {
+                                <td colspan="2">Order UnDelivered</td>
+                            }
+                            else
+                            {
+                                <td colspan="2">Pick order from Store</td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </table>
+    }
+    else
+    {
+        <h3>You haven't placed any order yet place a fresh new order from here</h3>
+    }
+</div>

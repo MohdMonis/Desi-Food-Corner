@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Your orders</h3>
+<form>
+    <button type="submit" formaction='@Url.Action("CreateOrder", "Order")'>
+        Create Order
+    </button>
+</form>
+@if (ViewBag.OrdersList != null)
+{
+    <table>
+        <tr>
+            <th>Order No</th>
+            <th>Customer Name</th>
+            <th>ContactNo</th>
+            <th>Address</th>
+            <th>Delivered By</th>
+            <th>Dispatched By</th>
+            <th>StatusReasonText</th>
+            <th colspan="2">Action</th>
+        </tr>
+        @foreach (var Item in ViewBag.OrdersList)
+        {
+            <tr>
+                <td>@Item.OrderNo</td>
+                <td>@Item.CustomerName</td>
+                <td>@Item.ContactNo</td>
+                <td>@Item.Address</td>
+                <td>@Item.DeliveredByName</td>
+                <td>@Item.DispatchedByName</td>
+                <td>@Item.StatusReasonText</td>
+                @if (Item.StatusReasonValue == 180720000)
+                {
+                    <td>
+                        <form>
+                            <button type="submit" formaction='@Url.Action("ViewOrder", "Order", new { Id = @Item.Id })'>Order Details</button>
+                        </form>
+                    </td>
+                    <td></td>
+                }
+                else
+                {
+                    <td>
+                        <form>
+                            <button type="submit" formaction='@Url.Action("ViewOrder", "Order", new { Id = @Item.Id })'>Order Details</button>
+                        </form>
+                    </td>
+                }
+                @if (Item.StatusReasonValue > 180720003)
+                {
+                    if (Item.StatusReasonValue == 180720012)
+                    {
+                        <td>Order Cancelled</td>
+                    }
+                    else if ((Item.StatusReasonValue == 180720013) || (Item.StatusReasonValue == 180720011))
+                    {
+                        <td>@Item.StatusReasonText</td>
+                    }
+                    else
+                    {
+                        <td>Delevered Shortly</td>
+                    }
+                }
+                else
+                {
+                    if (Item.StatusReasonValue != 180720000)
+                    {
+                        <td>
+                            <form>
+                                <button class="btn-cancel" type="submit" formaction='@Url.Action("CancelOrder", "Order", new { Id = Item.Id})'>Cancel Order</button>
+                            </form>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>You haven't placed any order yet place a fresh new order from here</h3>
+}
